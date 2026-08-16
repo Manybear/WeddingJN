@@ -266,9 +266,11 @@
   .countdown-section .eyebrow{ color:var(--gold-light); }
   .countdown-section h2{
     font-family:'Prompt', sans-serif;
-    font-size:clamp(2rem,5vw,2.8rem);
+    font-size:clamp(1.4rem,3vw,1.9rem);
+    font-weight:300;
     margin:.4rem 0 2.2rem;
     color:#fff;
+    opacity:0.9;
   }
   .cd-grid{
     display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; max-width:620px; margin:0 auto;
@@ -295,6 +297,73 @@
     color:var(--sky);
   }
   .cd-done{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.4rem; color:var(--gold-light); }
+
+  /* ---------- Calendar Widget ---------- */
+  .calendar-box {
+    max-width: 320px;
+    margin: 2.8rem auto 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(227, 201, 138, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem 1.4rem;
+    font-family: 'Prompt', sans-serif;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  .calendar-header {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--sky);
+    opacity: 0.9;
+    margin-bottom: 0.8rem;
+  }
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    align-items: center;
+  }
+  .calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    position: relative;
+  }
+  .calendar-day.highlight {
+    font-weight: 600;
+    color: #fff;
+    z-index: 1;
+  }
+  .calendar-day.highlight::before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(227, 201, 138, 0.15)" stroke="%23e3c98a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+    animation: calendarHeartbeat 1.8s infinite alternate ease-in-out;
+  }
+  @keyframes calendarHeartbeat {
+    from { transform: scale(0.95); }
+    to { transform: scale(1.08); }
+  }
 
   /* ---------- Card Invitation ---------- */
   /* --- Parents 3-column layout --- */
@@ -485,8 +554,8 @@
   }
   .profile-card{ text-align: center; }
   .profile-avatar{
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     margin: 0 auto 1.2rem;
     border: 3px solid rgba(216,185,142,0.6);
@@ -536,7 +605,7 @@
     }
     .profile-center-divider{ flex-direction: row; }
     .center-amp{ font-size: 2rem; }
-    .profile-avatar{ width: 120px; height: 120px; }
+    .profile-avatar{ width: 175px; height: 175px; }
   }
 
   /* ---------- Floating Mobile Nav ---------- */
@@ -585,7 +654,7 @@
   .timeline-section{ background:var(--cream); text-align:center; padding: 4.5rem 1.2rem; }
   .tl-wrap{ max-width:480px; margin:0 auto; }
   .tl-subtitle{
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--royal);
     margin-top: 0.4rem;
     margin-bottom: 2.8rem;
@@ -680,11 +749,11 @@
   /* ---------- Venue / Map ---------- */
   .venue-section{ background:#fff; text-align:center; }
   .venue-name{
-    font-family:'Noto Sans Thai', sans-serif;
+    font-family:'Prompt', sans-serif;
     font-weight:400; font-size:clamp(1.5rem,3.4vw,2rem);
     color:var(--royal); margin-bottom:.3rem;
   }
-  .venue-sub{ font-size:.92rem; color:#6b7280; margin-bottom:2rem; }
+  .venue-sub{ font-size:1.05rem; color:#6b7280; margin-bottom:2rem; }
   .map-frame{
     max-width:760px; margin:0 auto; border-radius:14px; overflow:hidden;
     box-shadow:0 20px 50px -25px rgba(12,28,70,.4); border:1px solid var(--line);
@@ -725,16 +794,16 @@
   .rsvp-section{ background:#fff; }
   .rsvp-wrap{ max-width:480px; margin:0 auto; text-align:center; }
   .rsvp-form{ text-align:left; margin-top:2rem; display:flex; flex-direction:column; gap:1.1rem; }
-  .field label{ display:block; font-size:.78rem; letter-spacing:.08em; color:var(--royal); margin-bottom:.4rem; }
+  .field label{ display:block; font-size:0.95rem; font-weight:500; letter-spacing:.03em; color:var(--royal); margin-bottom:.6rem; }
   .field input[type="text"], .field input[type="number"], .field textarea{
     width:100%; padding:.7rem .9rem; border:1px solid var(--line); border-radius:8px;
-    font-family:'Prompt', sans-serif; font-size:.92rem; background:var(--cream); color:var(--ink);
+    font-family:'Prompt', sans-serif; font-size:1.02rem; background:var(--cream); color:var(--ink);
   }
   .field textarea{ resize:vertical; min-height:70px; }
   .attend-toggle{ display:flex; gap:.7rem; }
   .attend-toggle button{
     flex:1; padding:.7rem; border-radius:8px; border:1px solid var(--line);
-    background:var(--cream); font-family:'Prompt',sans-serif; font-size:.88rem; cursor:pointer;
+    background:var(--cream); font-family:'Prompt',sans-serif; font-size:.96rem; cursor:pointer;
     color:var(--ink); transition:.15s;
   }
   .attend-toggle button.active{ background:var(--royal); color:#fff; border-color:var(--royal); }
@@ -930,7 +999,7 @@
 <!-- ===== COUPLE PROFILE / INTRO ===== -->
 <section class="couple-profile-section" id="intro">
   <div class="profile-container">
-    <h2 class="profile-title" style="margin-bottom:3rem;">BRIDE &amp; BRIDE</h2>
+    <h2 class="profile-title" style="margin-bottom:3rem; font-family:'Cormorant Garamond', serif; font-size:clamp(1.4rem, 3.5vw, 2.1rem); letter-spacing:0.12em; font-weight:500;">THE HONOUR OF YOUR PRESENCE AT OUR WEDDING</h2>
     <div class="profile-grid">
       <div class="profile-card">
         <div class="profile-avatar">
@@ -978,7 +1047,14 @@
 <!-- ===== COUNTDOWN ===== -->
 <section class="countdown-section">
   <div class="eyebrow">Counting Down To</div>
+  
+  <!-- Simple Wedding Date Badge -->
+  <div class="wedding-date-badge" style="font-family:'Cormorant Garamond', serif; font-size:clamp(2.8rem, 8vw, 3.8rem); font-weight:300; color:var(--gold-light); letter-spacing:0.12em; margin: 1.5rem 0 0.8rem; text-shadow:0 2px 12px rgba(0,0,0,0.2);">
+    20 NOV 2026
+  </div>
+  
   <h2>วันแห่งความสุขของเรา</h2>
+  
   <div class="cd-grid" id="countdown">
     <div class="cd-box"><div class="num" id="cd-days">--</div><div class="lbl">วัน</div></div>
     <div class="cd-box"><div class="num" id="cd-hours">--</div><div class="lbl">ชั่วโมง</div></div>
@@ -1059,6 +1135,23 @@
   </div>
 </section>
 
+<!-- ===== GIFT REGISTRY / QR CODE ===== -->
+<section class="gift-section" id="gift" style="background:#fcfbf8; padding: 4.5rem 1.5rem; text-align:center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div style="max-width: 480px; margin: 0 auto;">
+    <h2 style="font-family:'Prompt', sans-serif; font-size:1.6rem; color:#b5893f; font-weight:500; margin-bottom:1.5rem; margin-top:0;">ร่วมแสดงความยินดี</h2>
+    
+    <div style="background:#fff; border: 1px solid rgba(216, 185, 142, 0.25); border-radius:16px; padding:2rem 1.5rem; box-shadow:0 10px 25px -10px rgba(12,28,70,0.1); display:flex; flex-direction:column; align-items:center; gap:1.2rem;">
+      <img src="assets/qr.jpg" alt="QR Code" style="width:200px; height:200px; object-fit:contain; border-radius:8px; border:1px solid #f0ebe2; padding:0.5rem; background:#fff;">
+      
+      <div style="text-align:center; font-family:'Prompt', sans-serif;">
+        <div style="font-size:1.1rem; font-weight:600; color:var(--navy); margin-bottom:0.3rem;">ธนาคารไทยพาณิชย์ (SCB)</div>
+        <div style="font-size:1.35rem; font-weight:700; color:#b5893f; letter-spacing:0.05em; margin-bottom:0.3rem;">357-288365-7</div>
+        <div style="font-size:1rem; color:#4b5563;">ชื่อบัญชี: ฐานิดา อาชานนท์</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== VENUE / MAP ===== -->
 <section class="venue-section" id="venue">
   <p class="kicker">สถานที่จัดงาน</p>
@@ -1075,13 +1168,29 @@
   </a>
 </section>
 
-
+<!-- ===== THEME ===== -->
+<section class="theme-section" style="background:#fff; padding: 3rem 1.5rem; text-align:center; border-bottom: 1px solid var(--line);">
+  <div class="theme-container" style="margin-top:0; padding-top:0; border-top:none;">
+    <div class="theme-label">THEME</div>
+    <div class="theme-dots">
+      <span class="theme-dot" style="background:#0f2b5c;"></span>
+      <span class="theme-dot" style="background:#0090d0;"></span>
+      <span class="theme-dot" style="background:#7ec5ea;"></span>
+      <span class="theme-dot" style="background:#d0e8f7;"></span>
+      <span class="theme-dot" style="background:#f5e3b2;"></span>
+    </div>
+  </div>
+</section>
 
 <!-- ===== RSVP ===== -->
-<section class="rsvp-section" id="rsvp">
+<section class="rsvp-section" id="rsvp" style="padding: 4.5rem 1.5rem;">
   <div class="rsvp-wrap">
-    <p class="kicker">ยืนยันการเข้าร่วมงาน</p>
-    <form class="rsvp-form" id="rsvpForm">
+    <h2 style="font-family:'Prompt', sans-serif; font-size:1.6rem; color:var(--navy); font-weight:500; margin-bottom:1rem;">ยืนยันการเข้าร่วมงาน</h2>
+    <p style="font-family:'Prompt', sans-serif; font-size:0.95rem; color:#6b7280; line-height:1.7; margin-bottom:2.2rem; font-weight:300; max-width:440px; margin-left:auto; margin-right:auto;">
+      เพื่อให้เราสามารถวางแผนในการดูแลท่าน ซึ่งเป็นแขกคนสำคัญได้อย่างเต็มที่ ขอรบกวนทุกท่านทำแบบตอบรับการเข้าร่วมงานให้เราด้วยนะคะ<br>
+      <span style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.15rem; color:var(--gold); display:block; margin-top:0.4rem; font-weight:500; letter-spacing:0.02em;">Hope to see you at our wedding</span>
+    </p>
+    <form class="rsvp-form" id="rsvpForm" style="margin-top:0;">
       <div class="field">
         <label for="rname">ชื่อ-นามสกุล</label>
         <input type="text" id="rname" required placeholder="ชื่อของคุณ">
@@ -1112,20 +1221,6 @@
         <h3>ขอบคุณสำหรับการตอบรับค่ะ/ครับ</h3>
         <p>เราสองคนยินดีเป็นอย่างยิ่งที่จะได้พบคุณในวันสำคัญของเรา</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== THEME ===== -->
-<section class="theme-section" style="background:#fff; padding: 3rem 1.5rem; text-align:center; border-bottom: 1px solid var(--line);">
-  <div class="theme-container" style="margin-top:0; padding-top:0; border-top:none;">
-    <div class="theme-label">THEME</div>
-    <div class="theme-dots">
-      <span class="theme-dot" style="background:#0f2b5c;"></span>
-      <span class="theme-dot" style="background:#0090d0;"></span>
-      <span class="theme-dot" style="background:#7ec5ea;"></span>
-      <span class="theme-dot" style="background:#d0e8f7;"></span>
-      <span class="theme-dot" style="background:#d4b276;"></span>
     </div>
   </div>
 </section>
@@ -1377,6 +1472,9 @@
     openCardBtn.addEventListener('click', () => {
       envelopeOverlay.classList.add('fade-out');
       document.body.classList.remove('env-locked');
+      
+      // Force scroll to top so it starts at the Hero section
+      window.scrollTo(0, 0);
       
       // Start background music immediately
       if (bgMusic) {
