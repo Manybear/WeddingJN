@@ -72,11 +72,16 @@
   }
   .env-eyebrow {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
+    font-size: 0.92rem;
+    font-weight: 600;
     letter-spacing: 0.35em;
-    color: var(--gold-light);
+    background: linear-gradient(180deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    display: inline-block;
   }
   .env-names {
     font-family: 'Prompt', sans-serif;
@@ -88,8 +93,8 @@
   }
   .env-date {
     font-family: 'Prompt', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 300;
+    font-size: 1.25rem;
+    font-weight: 400;
     letter-spacing: 0.08em;
     color: #f4f0e2;
     margin-bottom: 3rem;
@@ -158,7 +163,16 @@
   }
   .stars-canvas{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:2; }
   .hero-content{ position:relative; z-index:3; color:#fff; }
-  .hero .eyebrow{ color:var(--gold-light); }
+  .hero .eyebrow{
+    background: linear-gradient(180deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size:1.05rem;
+    font-weight:600;
+    letter-spacing:0.35em;
+    display: inline-block;
+  }
   .hero h1{
     font-family:'Prompt', sans-serif;
     font-weight:400;
@@ -169,7 +183,7 @@
   }
   .hero .and{
     font-family:'Cormorant Garamond', serif;
-    font-size:2rem;
+    font-size:2.35rem;
     font-style:italic;
     letter-spacing:.03em;
     color:var(--sky);
@@ -178,7 +192,7 @@
   }
   .hero .and .surname{
     font-family:'Cormorant Garamond', serif;
-    font-size:.62rem;
+    font-size:.78rem;
     letter-spacing:.3em;
     text-transform:uppercase;
     color:var(--sky);
@@ -188,7 +202,7 @@
   .hero .and .amp{
     font-family:'Cormorant Garamond', serif;
     font-style:italic;
-    font-size:1rem;
+    font-size:1.15rem;
     color:var(--gold-light);
     display:block;
   }
@@ -197,20 +211,21 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:.9rem;
+    gap:0.4rem;
   }
   .hero .date-text{
     font-family:'Cormorant Garamond', serif;
     letter-spacing:.25em;
     text-transform:uppercase;
-    font-size:1rem;
+    font-size:1.15rem;
     line-height:1.7;
     color:#f4f0e2;
+    text-align:right;
   }
   .hero .day-num{
     font-family:'Cormorant Garamond', serif;
     font-style:italic;
-    font-size:4.5rem;
+    font-size:5.6rem;
     background:linear-gradient(180deg, var(--gold-light), var(--gold));
     -webkit-background-clip:text;
     background-clip:text;
@@ -416,9 +431,9 @@
   .tl-item:last-child{ border-bottom: none; }
   .tl-time{
     font-family: 'Prompt', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #d4b276; /* Gold color */
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--navy);
     line-height: 1;
     text-align: left;
   }
@@ -428,6 +443,14 @@
     color: var(--navy);
     font-weight: 500;
     text-align: right;
+  }
+  .tl-time-unit{
+    font-family: 'Prompt', sans-serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    font-weight: 300;
+    margin-left: 0.15rem;
+    display: inline-block;
   }
   .tl-icon-wrap{ display: none; }
   .tl-content{ display: none; }
@@ -707,10 +730,10 @@
     gap: 0.2rem;
   }
   .tl-time{
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.65rem;
-    font-weight: 600;
-    color: var(--royal);
+    font-family: 'Prompt', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--navy);
     line-height: 1.1;
   }
   .tl-heart-divider{ display: none; }
@@ -910,7 +933,7 @@
 
   .hero-content .eyebrow{ letter-spacing:.28em; }
   .hero .date-text{ font-size:.92rem; }
-  .tl-time{ font-family:'Cormorant Garamond', serif; font-weight:500; }
+  .tl-time{ font-family:'Prompt', sans-serif; font-weight:300; color:var(--navy); }
   .tl-label{ font-weight:300; }
   .rsvp-form input, .rsvp-form textarea{ outline:none; transition:border-color .2s, box-shadow .2s; }
   .rsvp-form input:focus, .rsvp-form textarea:focus{ border-color:rgba(36,91,145,.55); box-shadow:0 0 0 3px rgba(36,91,145,.08); }
@@ -924,6 +947,17 @@
     .card-box{ padding: 1.8rem 1rem; border-radius: 14px; }
     .parents-group{ font-size: 0.92rem; }
     .couple-card-title{ flex-direction: column; gap: 0.2rem; }
+    .parents-3col{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .p3-and {
+      padding: 0.2rem 0;
+      font-size: 1.1rem;
+    }
   }
   @media(max-width:480px){
     .hero h1{ font-size:2.45rem; }
@@ -976,7 +1010,7 @@
       Pirada <span class="surname">Thongtak</span>
     </div>
     <div class="date-block">
-      <svg class="moon-icon" viewBox="0 0 60 60" width="34" height="34">
+      <svg class="moon-icon" viewBox="0 0 60 60" width="46" height="46" style="transform: translateY(-3px); flex-shrink: 0; display: block; margin: 0 -1.2rem 0 0;">
         <defs>
           <linearGradient id="moonGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#f2d698"/>
@@ -1000,7 +1034,7 @@
 <!-- ===== COUPLE PROFILE / INTRO ===== -->
 <section class="couple-profile-section" id="intro">
   <div class="profile-container">
-    <h2 class="profile-title" style="margin-bottom:3rem; font-family:'Cormorant Garamond', serif; font-size:clamp(1.4rem, 3.5vw, 2.1rem); letter-spacing:0.12em; font-weight:500;">THE HONOUR OF YOUR PRESENCE AT OUR WEDDING</h2>
+    <h2 class="profile-title" style="margin-bottom:3rem; font-family:'Cormorant Garamond', serif; font-size:clamp(1.4rem, 3.5vw, 2.1rem); letter-spacing:0.12em; font-weight:500;">THE HONOUR OF YOUR PRESENCE IS REQUESTED AT OUR WEDDING</h2>
     <div class="profile-grid">
       <div class="profile-card">
         <div class="profile-avatar">
@@ -1072,23 +1106,23 @@
 
     <div class="tl-list">
       <div class="tl-item">
-        <div class="tl-time">15:19</div>
+        <div class="tl-time">15:19<span class="tl-time-unit">น.</span></div>
         <div class="tl-label">พิธีสงฆ์</div>
       </div>
       <div class="tl-item">
-        <div class="tl-time">15:49</div>
+        <div class="tl-time">15:49<span class="tl-time-unit">น.</span></div>
         <div class="tl-label">แห่ขันหมาก</div>
       </div>
       <div class="tl-item">
-        <div class="tl-time">16:19</div>
+        <div class="tl-time">16:19<span class="tl-time-unit">น.</span></div>
         <div class="tl-label">พิธีหมั้น</div>
       </div>
       <div class="tl-item">
-        <div class="tl-time">17:09</div>
+        <div class="tl-time">17:09<span class="tl-time-unit">น.</span></div>
         <div class="tl-label">รดน้ำสังข์</div>
       </div>
       <div class="tl-item">
-        <div class="tl-time">18:09</div>
+        <div class="tl-time">18:09<span class="tl-time-unit">น.</span></div>
         <div class="tl-label">พิธีฉลองมงคลสมรส</div>
       </div>
     </div>
