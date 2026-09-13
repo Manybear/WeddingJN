@@ -498,11 +498,14 @@
 
   /* --- Video section --- */
   .video-section{ background: var(--cream); text-align: center; }
-  .video-wrap{ max-width: 720px; margin: 0 auto; }
-  .video-wrap iframe{
-    width: 100%; aspect-ratio: 16/9; border: 0;
-    border-radius: 12px;
-    box-shadow: 0 12px 40px -15px rgba(12,28,70,0.3);
+  .video-wrap{ max-width: 480px; margin: 1.8rem auto 2.2rem; }
+  .video-wrap iframe,
+  .video-wrap video{
+    width: 100%; aspect-ratio: 16/9; border: 1px solid rgba(216, 185, 142, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -15px rgba(16, 41, 90, 0.22);
+    display: block;
+    background: #000;
   }
   .video-placeholder{
     background: linear-gradient(135deg, var(--navy), var(--royal));
@@ -1188,8 +1191,11 @@
 <!-- ===== GALLERY ===== -->
 <section class="gallery-section">
   <p class="kicker">Gallery</p>
-  <div class="video-wrap" style="margin-bottom: 2rem;">
-    <iframe src="https://drive.google.com/file/d/1tSX2Ozlbgae7ZvGkcsA39MiJOB_cpd0u/preview" allow="autoplay" allowfullscreen></iframe>
+  <div class="video-wrap">
+    <video id="weddingVideo" controls playsinline preload="metadata" muted loop>
+      <source src="assets/VDO_web.mp4#t=0.001" type="video/mp4">
+      เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+    </video>
   </div>
 
   <div class="gallery-grid" id="gallery">
@@ -1541,6 +1547,16 @@
           bgMusic.pause();
           updateMusicBtn(false);
         }
+      }
+    });
+  }
+
+  // Ensure background music keeps playing continuously while video plays
+  const weddingVideo = document.getElementById('weddingVideo');
+  if (weddingVideo && bgMusic) {
+    weddingVideo.addEventListener('play', () => {
+      if (bgMusic.paused) {
+        startMusic();
       }
     });
   }
