@@ -882,6 +882,28 @@
     color:var(--ink); transition:.15s;
   }
   .attend-toggle button.active{ background:var(--royal); color:#fff; border-color:var(--royal); }
+  .side-toggle{ display:flex; gap:.5rem; }
+  .side-toggle button{
+    flex:1; padding:.65rem .3rem; border-radius:8px; border:1px solid var(--line);
+    background:var(--cream); font-family:'Prompt',sans-serif; font-size:.86rem; cursor:pointer;
+    color:var(--ink); transition:.15s; text-align:center;
+  }
+  .side-toggle button.active{ background:var(--royal); color:#fff; border-color:var(--royal); font-weight:500; }
+  .gift-info-box{
+    background: rgba(216, 185, 142, 0.08);
+    border: 1px dashed rgba(216, 185, 142, 0.45);
+    border-radius: 12px;
+    padding: 1.1rem;
+    margin-top: .2rem;
+  }
+  .gift-info-title{
+    font-size: .92rem; font-weight: 500; color: #b5893f;
+    margin-bottom: .8rem; display: flex; align-items: center; gap: .4rem;
+  }
+  .gift-info-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .gift-info-grid label{ font-size: .85rem !important; margin-bottom: .35rem !important; color: #4b5563 !important; }
+  .gift-info-grid input{ background: #fff !important; }
+  .gift-info-hint{ font-size: .78rem; color: #8a8474; margin-top: .6rem; line-height: 1.4; }
   .submit-btn{
     padding:.85rem; border:none; border-radius:999px; background:var(--gold);
     color:#fff; font-size:.9rem; letter-spacing:.08em; cursor:pointer; transition:.15s;
@@ -1293,15 +1315,22 @@
         <input type="text" id="rname" required placeholder="ชื่อของคุณ">
       </div>
       <div class="field">
+        <label>แขกฝ่ายใด</label>
+        <div class="side-toggle">
+          <button type="button" data-val="ฝ่ายเจ้าบ่าว" class="side-btn">🤵 ฝ่ายเจ้าบ่าว</button>
+          <button type="button" data-val="ฝ่ายเจ้าสาว" class="side-btn active">👰 ฝ่ายเจ้าสาว</button>
+        </div>
+      </div>
+      <div class="field">
         <label>จะเข้าร่วมงานหรือไม่</label>
         <div class="attend-toggle">
           <button type="button" data-val="yes" class="attend-btn active">ยินดีเข้าร่วม</button>
           <button type="button" data-val="no" class="attend-btn">ไม่สะดวก</button>
         </div>
       </div>
-      <div class="field">
+      <div class="field" id="guestsField" style="transition: opacity 0.2s;">
         <label for="rguests">จำนวนผู้ร่วมงาน (รวมท่าน)</label>
-        <input type="number" id="rguests" min="1" max="10" value="1">
+        <input type="number" id="rguests" min="0" max="10" value="1">
       </div>
       <div class="field">
         <label for="rmsg">ข้อความถึงคู่บ่าวสาว (ถ้ามี)</label>
@@ -1401,18 +1430,51 @@
   tick();
   setInterval(tick, 1000);
 
+  // ---------- RSVP side toggle ----------
+  let sideVal = 'ฝ่ายเจ้าสาว';
+  document.querySelectorAll('.side-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      sideVal = btn.dataset.val;
+    });
+  });
+
   // ---------- RSVP attend toggle ----------
   let attendVal = 'yes';
+  const guestsInput = document.getElementById('rguests');
+  const guestsField = document.getElementById('guestsField');
+
   document.querySelectorAll('.attend-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.attend-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       attendVal = btn.dataset.val;
+
+      if(attendVal === 'no'){
+        if(guestsInput){
+          guestsInput.value = 0;
+          guestsInput.disabled = true;
+        }
+        if(guestsField){
+          guestsField.style.opacity = '0.45';
+          guestsField.style.pointerEvents = 'none';
+        }
+      } else {
+        if(guestsInput){
+          if(guestsInput.value === '0') guestsInput.value = 1;
+          guestsInput.disabled = false;
+        }
+        if(guestsField){
+          guestsField.style.opacity = '1';
+          guestsField.style.pointerEvents = 'auto';
+        }
+      }
     });
   });
 
   // ---------- RSVP submit → Google Sheet ----------
-  const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzTJiAlq4aRIubYQVfP8EZmfRppmRNiZ1KKRRz-axYN-I13AzaiIhi5haF_3HdDv7w-mA/exec";
+  const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzsad81sUweSaHpLev-j9EuEb6nsW5_qWfF0nhU0qpa66Q6XtQPe17POrLLxIppJjPMIA/exec";
 
   async function loadGuestCount(){
     const el = document.getElementById('guestCount');
@@ -1432,7 +1494,7 @@
     const submitBtn = formEl.querySelector('.submit-btn');
     const msgEl = document.getElementById('rsvpMsg');
     const name = document.getElementById('rname').value.trim();
-    const guests = document.getElementById('rguests').value;
+    const guests = attendVal === 'no' ? 0 : (parseInt(guestsInput ? guestsInput.value : 1, 10) || 1);
     const message = document.getElementById('rmsg').value.trim();
     if(!name){ msgEl.textContent = 'กรุณากรอกชื่อ'; msgEl.className='rsvp-msg err'; return; }
     if(!SHEET_ENDPOINT || SHEET_ENDPOINT.startsWith('PASTE_')){
@@ -1440,7 +1502,13 @@
       msgEl.className = 'rsvp-msg err';
       return;
     }
-    const entry = { name, attend: attendVal, guests, message };
+    const entry = {
+      name,
+      side: sideVal,
+      attend: attendVal,
+      guests,
+      message
+    };
     
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'กำลังส่งข้อมูล...';
